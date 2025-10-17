@@ -1,4 +1,4 @@
-package org.homework.dz10;
+package org.homework1.dz10;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
