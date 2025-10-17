@@ -1,4 +1,4 @@
-package org.homework1.dz15;
+package org.homework.dz15;
 
 import java.util.List;
 

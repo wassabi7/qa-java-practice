@@ -1,4 +1,4 @@
-package org.homework1.dz15;
+package org.homework.dz15;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
