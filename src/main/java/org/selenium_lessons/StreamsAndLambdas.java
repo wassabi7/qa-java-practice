@@ -1,4 +1,4 @@
-package org.seleniumlessons;
+package org.selenium_lessons;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

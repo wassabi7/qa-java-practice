@@ -1,4 +1,4 @@
-package org.seleniumlessons;
+package org.selenium_lessons;
 
 public class CoreJavaBrushUp {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package org.homework1.dz12;
+package org.homework.dz12;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
