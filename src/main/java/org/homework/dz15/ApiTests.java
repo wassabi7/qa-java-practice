@@ -2,6 +2,7 @@ package org.homework.dz15;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -45,5 +46,21 @@ public class ApiTests {
 
         Pet responsePost = objectMapper.readValue(response.asString(), Pet.class);
         Assert.assertEquals(responsePost.getName(), cat.getName());
+    }
+
+    @Test
+    public void checkGetRequestFromSwaggerPetStore() {
+        Response response = given()
+                .when()
+                .get(URL + "v2/pet/findByStatus?status=pending")
+                .then().log().all()
+                .extract().response();
+
+        JsonPath jsonPath = response.jsonPath();
+        List<String> statuses = jsonPath.get("status");
+
+        for (String status : statuses) {
+            Assert.assertEquals(status, "pending");
+        }
     }
 }
