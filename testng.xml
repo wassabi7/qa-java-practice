@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Test Suite" parallel="tests" thread-count="2">
+    <test name="Selenium Tests">
+        <classes>
+            <class name="org.homework.dz15.ApiTests.java"/>
+            <class name="org.homework.dz12.LoginTest.java"/>
+        </classes>
+    </test>
+</suite>
