@@ -1,13 +1,14 @@
 pipeline {
-    agent any  // Використовуємо будь-який агент для запуску pipeline
+    agent any
 
     tools {
-        maven 'Maven-3.8.5' // Вказуємо версію Maven (зазначте, якщо Maven вже налаштований у Jenkins)
-        jdk 'OpenJDK-11' // Вказуємо JDK для запуску проекту
+        maven 'Maven-3.8.5'
+        jdk 'OpenJDK-11'
     }
 
     environment {
-        // Змінні середовища (якщо потрібно)
+        JAVA_HOME = '/usr/lib/jvm/java-11-openjdk-amd64'
+        PATH = "$JAVA_HOME/bin:$PATH"
         MAVEN_OPTS = "-Xmx2g"
     }
 
