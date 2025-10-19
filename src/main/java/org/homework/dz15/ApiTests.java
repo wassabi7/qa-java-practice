@@ -2,6 +2,7 @@ package org.homework.dz15;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.qameta.allure.*;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -16,6 +17,11 @@ public class ApiTests {
     private final static String URL = "https://petstore.swagger.io/";
 
     @Test
+    @Epic("API Tests")
+    @Feature("API Feature")
+    @Story("Valid API GET Request")
+    @Description("This test check status code of GET request to Swagger Pet Store API.")
+    @Severity(SeverityLevel.NORMAL)
     public void checkStatusCode200() {
         Response response = given()
                 .when()
