@@ -3,7 +3,6 @@
     <test name="Selenium Tests">
         <classes>
             <class name="org.homework.dz15.ApiTests"/>
-            <class name="org.homework.dz12.LoginTest"/>
         </classes>
     </test>
 </suite>

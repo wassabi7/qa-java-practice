@@ -32,5 +32,4 @@ public class LoginTest {
     public void closeBrowser() {
         driver.close();
     }
-
 }
