@@ -38,7 +38,8 @@ pipeline {
 
     post {
         always {
-            allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+            sh 'allure generate --clean -o allure-report target/allure-results'
+            allure reportPath: 'allure-report', results: [[path: 'target/allure-results']]
         }
         success {
             echo 'Build and Tests completed successfully'
