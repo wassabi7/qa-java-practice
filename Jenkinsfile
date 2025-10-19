@@ -38,7 +38,6 @@ pipeline {
 
     post {
         always {
-            sh 'allure generate --clean -o allure-report target/allure-results'
             allure reportPath: 'allure-report', results: [[path: 'target/allure-results']]
         }
         success {
