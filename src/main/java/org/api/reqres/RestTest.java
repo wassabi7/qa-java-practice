@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.time.Clock;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
 
@@ -32,8 +33,8 @@ public class RestTest {
         users.forEach(x -> Assert.assertTrue(x.getAvatar().contains(x.getId().toString())));
         Assert.assertTrue(users.stream().allMatch(x -> x.getEmail().endsWith("@reqres.in")));
 
-        List<String> avatars = users.stream().map(UserData::getAvatar).toList();
-        List<String> ids = users.stream().map(x -> x.getId().toString()).toList();
+        List<String> avatars = users.stream().map(UserData::getAvatar).collect(Collectors.toList());
+        List<String> ids = users.stream().map(x -> x.getId().toString()).collect(Collectors.toList());
 
         for (int i = 0; i < avatars.size(); i++){
             Assert.assertTrue(avatars.get(i).contains(ids.get(i)));
@@ -88,8 +89,8 @@ public class RestTest {
                 .then().log().all()
                 .extract().body().jsonPath().getList("data", ColorsData.class);
 
-        List<Integer> years = colors.stream().map(ColorsData::getYear).toList();
-        List<Integer> sortedYears = years.stream().sorted().toList();
+        List<Integer> years = colors.stream().map(ColorsData::getYear).collect(Collectors.toList());
+        List<Integer> sortedYears = years.stream().sorted().collect(Collectors.toList());
 
         Assert.assertEquals(years, sortedYears);
     }

@@ -42,7 +42,7 @@ public class LiveDemo {
             List<WebElement> elements = driver.findElements(By.xpath("//tr/td[1]"));
             price = elements.stream().filter(s -> s.getText().contains("Rice"))
                     .map(LiveDemo::getPriceVeggie)
-                    .toList();
+                    .collect(Collectors.toList());
             price.forEach(System.out::println);
             if (price.isEmpty()) {
                 driver.findElement(By.cssSelector("[aria-label='Next']")).click();
@@ -65,7 +65,7 @@ public class LiveDemo {
         driver.findElement(By.xpath("//input[@id='search-field']")).sendKeys(productName);
         List<WebElement> products = driver.findElements(By.xpath("//tr/td[1]"));
         List<WebElement> newList = products.stream().filter(product -> product.getText().contains(productName))
-                .toList();
+                .collect(Collectors.toList());
 
         Assert.assertEquals(newList.size(), products.size());
         driver.close();
