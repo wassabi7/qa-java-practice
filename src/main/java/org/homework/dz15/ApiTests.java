@@ -3,9 +3,11 @@ package org.homework.dz15;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.*;
+import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -14,7 +16,15 @@ import static io.restassured.RestAssured.given;
 
 public class ApiTests {
 
-    private final static String URL = "https://petstore.swagger.io/";
+    private final static String BASE_URL = "https://petstore.swagger.io/v2";
+    private final static String ENDPOINT_PET = "/pet";
+    private final static String ENDPOINT_FINDBYSTATUS = ENDPOINT_PET + "/findByStatus";
+
+
+    @BeforeTest
+    public void setup() {
+        RestAssured.baseURI = BASE_URL;
+    }
 
     @Test
     @Epic("API Tests")
@@ -24,8 +34,9 @@ public class ApiTests {
     @Severity(SeverityLevel.NORMAL)
     public void checkStatusCode200() {
         Response response = given()
+                .pathParam("id", 12)
                 .when()
-                .get(URL + "#/pet/addPet")
+                .get(ENDPOINT_PET + "/{id}")
                 .then().log().all()
                 .extract().response();
 
@@ -46,7 +57,7 @@ public class ApiTests {
                 .contentType("application/json")
                 .body(postJson)
                 .when()
-                .post(URL + "v2/pet")
+                .post(ENDPOINT_PET)
                 .then().log().all()
                 .extract().response();
 
@@ -56,9 +67,12 @@ public class ApiTests {
 
     @Test
     public void checkGetRequestFromSwaggerPetStore() {
+        String searchStatus = "pending";
+
         Response response = given()
+                .queryParam("status", searchStatus)
                 .when()
-                .get(URL + "v2/pet/findByStatus?status=pending")
+                .get(ENDPOINT_FINDBYSTATUS)
                 .then().log().all()
                 .extract().response();
 
@@ -66,7 +80,7 @@ public class ApiTests {
         List<String> statuses = jsonPath.get("status");
 
         for (String status : statuses) {
-            Assert.assertEquals(status, "pending");
+            Assert.assertEquals(status, searchStatus);
         }
     }
 }
